@@ -1,0 +1,24 @@
+<!-- catalog/templates/catalog/author_detail.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+
+  <p><strong>Date of birth:</strong> {{ author.date_of_birth }}</p>
+  <p><strong>Date of death:</strong> {{ author.date_of_death|default:"Still alive" }}</p>
+
+  <h2>Books by {{ author.first_name }}:</h2>
+  {% if author.book_set.all %}
+    <ul>
+      {% for book in author.book_set.all %}
+        <li>
+          <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No books available for this author.</p>
+  {% endif %}
+
+  <p><a href="{% url 'author_list' %}">Back to All Authors</a></p>
+{% endblock %}
