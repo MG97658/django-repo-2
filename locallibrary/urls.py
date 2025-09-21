@@ -24,12 +24,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
-    path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
-    path('authors/', views.AuthorListView.as_view(), name='author_list'),
-    path('authors/<int:pk>/', views.AuthorDetailView.as_view(), name='author-detail'),
     path('accounts/', include('django.contrib.auth.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
